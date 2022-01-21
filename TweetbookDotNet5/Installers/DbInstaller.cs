@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TweetbookDotNet5.Data;
+using TweetbookDotNet5.Services;
 
 namespace TweetbookDotNet5.Installers
 {
@@ -16,6 +17,8 @@ namespace TweetbookDotNet5.Installers
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<DataContext>();
+
+            services.AddSingleton<IPostService, PostService>();
         }
     }
 }
