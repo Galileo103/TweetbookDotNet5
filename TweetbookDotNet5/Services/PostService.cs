@@ -22,6 +22,22 @@ namespace TweetbookDotNet5.Services
             return _posts.SingleOrDefault(s => s.Id == postId);
         }
 
+        public bool UpdatePost(Post postToUpdate)
+        {
+            var exist = GetPostById(postToUpdate.Id) != null;
+
+            if (!exist)
+            {
+                return false;
+            }
+
+            var index = _posts.FindIndex(x => x.Id == postToUpdate.Id);
+
+            _posts[index] = postToUpdate;
+
+            return true;
+        }
+
         public List<Post> GetPosts()
         {
             return _posts;
