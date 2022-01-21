@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31515.178
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TweetbookDotNet5", "TweetbookDotNet5\TweetbookDotNet5.csproj", "{F34D2575-22BA-4892-BC24-F97B9464CA4B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F34D2575-22BA-4892-BC24-F97B9464CA4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F34D2575-22BA-4892-BC24-F97B9464CA4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F34D2575-22BA-4892-BC24-F97B9464CA4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F34D2575-22BA-4892-BC24-F97B9464CA4B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B37523CD-619A-4A8C-BD15-776839618155}
+	EndGlobalSection
+EndGlobal
