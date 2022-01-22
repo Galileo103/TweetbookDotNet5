@@ -36,6 +36,11 @@ namespace TweetbookDotNet5
                 app.UseHsts();
             }
 
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+
+            app.UseAuthentication();
+
             var swaggerOptions = new SwaggerOptions();
             Configuration.GetSection(nameof(SwaggerOptions)).Bind(swaggerOptions);
 
@@ -48,9 +53,6 @@ namespace TweetbookDotNet5
                 options.SwaggerEndpoint(swaggerOptions.UIEndpoint, swaggerOptions.Description);
                 options.RoutePrefix = string.Empty;
             });
-
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
 
             app.UseRouting();
 
