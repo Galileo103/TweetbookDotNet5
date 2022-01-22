@@ -1,14 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
-using TweetbookDotNet5.Contracts;
-using TweetbookDotNet5.Controllers.V1.Requests;
-using TweetbookDotNet5.Controllers.V1.Responses;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using TweetbookDotNet5.Contracts.V1;
+using TweetbookDotNet5.Contracts.V1.Requests;
+using TweetbookDotNet5.Contracts.V1.Responses;
 using TweetbookDotNet5.Domain;
 using TweetbookDotNet5.Services;
 
 namespace TweetbookDotNet5.Controllers.V1
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class PostsController : Controller
     {
         private IPostService _postService;

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace TweetbookDotNet5.Contracts
+﻿namespace TweetbookDotNet5.Contracts.V1
 {
     public static class ApiRoutes
     {
@@ -18,6 +13,12 @@ namespace TweetbookDotNet5.Contracts
             public const string Update = Base + "/posts/{postId}";
             public const string Delete = Base + "/posts/{postId}";
             public const string Create = Base + "/posts";
+        }
+
+        public static class Identity
+        {
+            public const string Login = Base + "/identity/login";
+            public const string Register = Base + "/identity/register";
         }
     }
 }

@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using TweetbookDotNet5.Options;
+using TweetbookDotNet5.Services;
 
 namespace TweetbookDotNet5.Installers
 {
@@ -16,6 +17,8 @@ namespace TweetbookDotNet5.Installers
             var jwtSettings = new JwtSettings();
             configuration.Bind(nameof(JwtSettings), jwtSettings);
             services.AddSingleton(jwtSettings);
+
+            services.AddScoped<IIdentityService, IdentityService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
