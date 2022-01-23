@@ -2,7 +2,7 @@
 
 namespace TweetbookDotNet5.Contracts.V1.Requests
 {
-    public class UserRegistrationRequest
+    public class UserLoginRequest
     {
         [EmailAddress]
         public string Email { get; set; }
