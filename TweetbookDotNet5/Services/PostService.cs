@@ -52,5 +52,12 @@ namespace TweetbookDotNet5.Services
 
             return deleted > 0;
         }
+
+        public async Task<bool> UserOwnsPostAsync(Guid postId, string userId)
+        {
+            var post = await _dataContext.Posts.AsNoTracking().SingleOrDefaultAsync(x => x.Id == postId && x.UserId == userId);
+
+            return post != null;
+        }
     }
 }

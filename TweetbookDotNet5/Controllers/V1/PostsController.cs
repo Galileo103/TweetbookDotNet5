@@ -7,6 +7,7 @@ using TweetbookDotNet5.Contracts.V1;
 using TweetbookDotNet5.Contracts.V1.Requests;
 using TweetbookDotNet5.Contracts.V1.Responses;
 using TweetbookDotNet5.Domain;
+using TweetbookDotNet5.Extensions;
 using TweetbookDotNet5.Services;
 
 namespace TweetbookDotNet5.Controllers.V1
@@ -20,6 +21,7 @@ namespace TweetbookDotNet5.Controllers.V1
             _postService = postService;
         }
         [HttpGet(ApiRoutes.Posts.GetAll)]
+        //[ProducesResponseType(200, Type = typeof(PostRespons[]))]
         public async Task<IActionResult> GetAll()
         {
             return Ok(await _postService.GetPostsAsync());
@@ -41,11 +43,13 @@ namespace TweetbookDotNet5.Controllers.V1
         [HttpPut(ApiRoutes.Posts.Update)]
         public async Task<IActionResult> Update([FromRoute] Guid postId, [FromBody] UpdatePostRequest postRequest)
         {
-            var post = new Post
-            {
-                Id = postId,
-                Name = postRequest.Name
-            };
+            var userOwnsPost = await _postService.UserOwnsPostAsync(postId, HttpContext.GetUserId());
+
+            if (!userOwnsPost)
+                return BadRequest(new { error = "You do not own this post" });
+
+            var post = await _postService.GetPostByIdAsync(postId);
+            post.Name = postRequest.Name;
 
             var updated = await _postService.UpdatePostAsync(post);
             if (!updated)
@@ -59,6 +63,10 @@ namespace TweetbookDotNet5.Controllers.V1
         [HttpDelete(ApiRoutes.Posts.Delete)]
         public async Task<IActionResult> Delete([FromRoute] Guid postId)
         {
+            var userOwnsPost = await _postService.UserOwnsPostAsync(postId, HttpContext.GetUserId());
+
+            if (!userOwnsPost)
+                return BadRequest(new { error = "You do not own this post" });
 
             var deleted = await _postService.DeletePostAsync(postId);
             if (!deleted)
@@ -72,7 +80,11 @@ namespace TweetbookDotNet5.Controllers.V1
         [HttpPost(ApiRoutes.Posts.Create)]
         public async Task<IActionResult> Create([FromBody] CreatePostRequest postRequest)
         {
-            var post = new Post { Name = postRequest.Name };
+            var post = new Post
+            {
+                Name = postRequest.Name,
+                UserId = HttpContext.GetUserId()
+            };
 
             await _postService.CreatePostAsync(post);
 
