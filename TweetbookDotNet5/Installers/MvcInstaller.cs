@@ -46,6 +46,14 @@ namespace TweetbookDotNet5.Installers
                     x.TokenValidationParameters = tokenValidationParameters;
                 });
 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("TagViewer", builder =>
+                {
+                    builder.RequireClaim("tags.view", "true");
+                });
+            });
+
             services.AddSwaggerGen(swagger =>
             {
                 swagger.SwaggerDoc("v1", new OpenApiInfo() { Title = "TweetBook APIs", Version = "v1" });

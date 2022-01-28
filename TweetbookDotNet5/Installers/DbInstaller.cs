@@ -16,6 +16,7 @@ namespace TweetbookDotNet5.Installers
                     configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentityCore<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<DataContext>();
 
             services.AddScoped<IPostService, PostService>();

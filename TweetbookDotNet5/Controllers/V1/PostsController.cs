@@ -21,6 +21,7 @@ namespace TweetbookDotNet5.Controllers.V1
             _postService = postService;
         }
         [HttpGet(ApiRoutes.Posts.GetAll)]
+        //[Authorize(Policy = "TagViewer")]
         //[ProducesResponseType(200, Type = typeof(PostRespons[]))]
         public async Task<IActionResult> GetAll()
         {
